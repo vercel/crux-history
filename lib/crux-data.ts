@@ -20,9 +20,9 @@ export function transformToChartData(data: CruxData, metric: string): CruxChart 
   const dataForMetric = data.record.metrics[metric];
   const datasets = [
     {
-      label: dataForMetric.histogramTimeseries[0].end ? `${dataForMetric.histogramTimeseries[0].start}-${dataForMetric.histogramTimeseries[0].end}` : `>${dataForMetric.histogramTimeseries[0].start}`,
-      data: dataForMetric.histogramTimeseries[0].densities,
-      backgroundColor: 'rgb(0, 128, 64)'
+      label: dataForMetric.histogramTimeseries[2].end ? `${dataForMetric.histogramTimeseries[2].start}-${dataForMetric.histogramTimeseries[2].end}` : `>${dataForMetric.histogramTimeseries[2].start}`,
+      data: dataForMetric.histogramTimeseries[2].densities,
+      backgroundColor: 'rgb(255, 2, 90)'
     },
     {
       label: dataForMetric.histogramTimeseries[1].end ? `${dataForMetric.histogramTimeseries[1].start}-${dataForMetric.histogramTimeseries[1].end}` : `>${dataForMetric.histogramTimeseries[1].start}`,
@@ -30,9 +30,9 @@ export function transformToChartData(data: CruxData, metric: string): CruxChart 
       backgroundColor: 'rgb(255, 200, 0)'
     },
     {
-      label: dataForMetric.histogramTimeseries[2].end ? `${dataForMetric.histogramTimeseries[2].start}-${dataForMetric.histogramTimeseries[2].end}` : `>${dataForMetric.histogramTimeseries[2].start}`,
-      data: dataForMetric.histogramTimeseries[2].densities,
-      backgroundColor: 'rgb(255, 2, 90)'
+      label: dataForMetric.histogramTimeseries[0].end ? `${dataForMetric.histogramTimeseries[0].start}-${dataForMetric.histogramTimeseries[0].end}` : `>${dataForMetric.histogramTimeseries[0].start}`,
+      data: dataForMetric.histogramTimeseries[0].densities,
+      backgroundColor: 'rgb(0, 128, 64)'
     },
   ]
 

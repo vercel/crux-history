@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  LogarithmicScale,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { CruxChart } from '@/lib/types';
@@ -21,6 +22,7 @@ type Props = {
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  LogarithmicScale,
   BarElement,
   Title,
   Tooltip,
@@ -48,6 +50,7 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         }
       },
       y: {
+        type: 'logarithmic',
         stacked: true,
         title: {
           text: 'Percentage of users',
