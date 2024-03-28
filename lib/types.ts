@@ -7,9 +7,9 @@ export type CruxMetric = {
     densities: number[];
   }[];
   percentilesTimeseries: {
-    p75s: number[]
+    p75s: number[];
   };
-}
+};
 
 export type CruxCollectionPeriod = {
   firstDate: {
@@ -21,15 +21,15 @@ export type CruxCollectionPeriod = {
     year: number;
     month: number;
     day: number;
-  }
-}
+  };
+};
 
 export type CruxData = {
-  record: {
+  record?: {
     key: {
       formFactor?: string;
       origin: string;
-    },
+    };
     metrics: {
       cumulative_layout_shift?: CruxMetric;
       experimental_time_to_first_byte?: CruxMetric;
@@ -37,10 +37,11 @@ export type CruxData = {
       first_input_delay?: CruxMetric;
       interaction_to_next_paint?: CruxMetric;
       largest_contentful_paint?: CruxMetric;
-    }
+    };
     collectionPeriods: CruxCollectionPeriod[];
-  }
-}
+  };
+  error?: any;
+};
 
 export type CruxChart = {
   title?: string;
@@ -50,4 +51,4 @@ export type CruxChart = {
     data: number[];
     backgroundColor: string;
   }[];
-}
+};

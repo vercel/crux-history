@@ -1,24 +1,31 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 const QueryForm = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [origin, setOrigin] = useState<string>(searchParams.get('origin') || '');
+  // Indicates whether to make the request to an `origin` or a specific URL
+  // See: https://developer.chrome.com/docs/crux/history-api#schema
+  const [query, setQuery] = useState<string>(searchParams.get('query') || 'origin');
+
+  const [url, setUrl] = useState<string>(searchParams.get('url') || '');
   const [formFactor, setFormFactor] = useState<string>(searchParams.get('formFactor') || '');
 
   const handleChange = e => {
     const { value, id } = e.target;
 
     switch (id) {
-      case 'origin':
-        setOrigin(value);
+      case 'url':
+        setUrl(value);
         break;
       case 'formFactor':
         setFormFactor(value);
+      case 'origin-option':
+        setQuery('origin');
+      case 'page-option':
+        setQuery('page');
       default:
         break;
     }
@@ -30,14 +37,39 @@ const QueryForm = () => {
       className="w-1/2 space-y-4"
     >
       <div className="flex flex-col">
-        <label htmlFor="origin">Origin (must include protocol)</label>
+        <fieldset>
+          <legend className="font-bold mb-1">Query type:</legend>
+          <div className="space-x-4">
+            <label htmlFor="origin-option">Full origin</label>
+            <input
+              type="radio"
+              name="queryType"
+              value="origin"
+              id="origin-option"
+              checked={query === 'origin'}
+              onChange={() => setQuery('origin')}
+            />
+            <label className="page-option">Specific page</label>
+            <input
+              type="radio"
+              name="queryType"
+              value="page"
+              id="page-option"
+              checked={query === 'page'}
+              onChange={handleChange}
+            />
+          </div>
+        </fieldset>
+      </div>
+      <div className="flex flex-col">
+        <label htmlFor="url">URL (must include protocol)</label>
         <input
-          type="text"
-          name="origin"
-          id="origin"
+          type="url"
+          name="url"
+          id="url"
           placeholder="URL of site to analyze"
           required
-          value={origin}
+          value={url}
           onChange={handleChange}
           className="text-black"
         />

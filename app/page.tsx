@@ -11,8 +11,13 @@ export default async function Home({
 }) {
   const origin = searchParams['origin'];
   const formFactor = searchParams['formFactor'];
+  const queryType = searchParams['queryType'];
 
-  const res = await getCruxData(origin || default_origin, formFactor || 'DESKTOP');
+  const res = await getCruxData(
+    origin || default_origin,
+    formFactor || 'DESKTOP',
+    queryType || 'origin'
+  );
 
   let clsData;
   let ttfbData;

@@ -1,13 +1,21 @@
 import { CruxData, CruxChart, FormFactor } from './types';
 
 export async function getCruxData(
-  origin: string,
-  formFactor: FormFactor
-): Promise<CruxData & { error?: any }> {
-  const body = {
-    origin,
+  url: string,
+  formFactor: FormFactor,
+  queryType: 'page' | 'origin' | string
+): Promise<CruxData> {
+  const body: any = {
     formFactor,
   };
+
+  if (queryType === 'origin') {
+    body.origin = url;
+  } else if (queryType === 'page') {
+    body.url = url;
+  } else {
+    return { error: 'Invalid query type' };
+  }
 
   const res = await fetch(
     `https://chromeuxreport.googleapis.com/v1/records:queryHistoryRecord?key=${process.env.GOOGLE_API_KEY}`,
@@ -21,6 +29,10 @@ export async function getCruxData(
 }
 
 export function transformToChartData(data: CruxData, metric: string): CruxChart {
+  if (!data.record) {
+    throw new Error('Cannot transform data for graphing');
+  }
+
   const labels = data.record.collectionPeriods.map(
     p => `${p.lastDate.year}-${p.lastDate.month}-${p.lastDate.day}`
   );
