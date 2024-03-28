@@ -1,4 +1,4 @@
-export type FormFactor = 'PHONE' | 'DESKTOP'
+export type FormFactor = 'PHONE' | 'DESKTOP' | string;
 
 export type CruxMetric = {
   histogramTimeseries: {
