@@ -1,7 +1,7 @@
 import { HistoricalCruxChart } from '@/components/historical-crux-chart';
 import { getCruxData, transformToChartData } from '@/lib/crux-data';
 
-const default_origin = 'https://openai.com';
+const default_origin = 'https://vercel.com';
 
 export default async function Home({
   searchParams,
