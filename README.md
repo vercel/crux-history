@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CrUX Historical Data 🚧
 
-## Getting Started
+The CrUX historical data dashboard is intended to surface trends in core web vitals over time.
 
-First, run the development server:
+## What is this?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is a small collection of charts that shows CrUX (Chrome User Experience Report) historical data. The API provides a number of metrics, all of which are displayed in the dashboard:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- CLS (Cumulative layoutshift)
+- TTFB (Time to first byte)
+- FCP (First contentful paint)
+- LCP (Largest contentful paint)
+- FID (First input delay)
+- Interaction to next paint
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For more info on what CrUX data entails and how it's gathered, see: [https://developer.chrome.com/docs/crux](https://developer.chrome.com/docs/crux).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## How to interpret the charts
 
-## Learn More
+Each chart is a histogram spanning the past 25 weeks. Each "week" on the chart is actually the last date of a 28-day rolling window. The bins into which the histogram is divided (red = bad, yellow = okay, green = good) are defined by Google and hard coded in their API response.
 
-To learn more about Next.js, take a look at the following resources:
+The unit of measurement for all charts is milliseconds, except for CLS, which uses a scoring system.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+As of March 28 2024, the TTFB metric is still considered experimental.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+❗IMPORTANT❗ - Note that the Y-axis on the graph is logarithmically scaled. This ensures that changes in "bad" and "okay" user groups are amplified. Since these charts are meant to show change over time rather than raw magnitudes, do not assume that a big red bar necessarily means a high percentage of users with a bad experience.
