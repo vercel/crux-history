@@ -35,8 +35,9 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
       title: {
         display: true,
         text: title,
+        color: '#bbb',
         font: {
-          size: 24
+          size: 24,
         }
       },
     },
@@ -46,7 +47,8 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         stacked: true,
         title: {
           text: 'Last day of rolling 28-day measurement window',
-          display: true
+          display: true,
+          color: '#bbb'
         }
       },
       y: {
@@ -55,6 +57,7 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         title: {
           text: 'Percentage of users',
           display: true,
+          color: '#bbb'
         }
       },
     },
