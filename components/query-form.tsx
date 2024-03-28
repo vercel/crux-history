@@ -8,7 +8,7 @@ const QueryForm = () => {
 
   // Indicates whether to make the request to an `origin` or a specific URL
   // See: https://developer.chrome.com/docs/crux/history-api#schema
-  const [query, setQuery] = useState<string>(searchParams.get('query') || 'origin');
+  const [query, setQuery] = useState<string>(searchParams.get('queryType') || 'origin');
 
   const [url, setUrl] = useState<string>(searchParams.get('url') || '');
   const [formFactor, setFormFactor] = useState<string>(searchParams.get('formFactor') || '');
