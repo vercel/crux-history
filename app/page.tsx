@@ -23,7 +23,7 @@ export default async function Home({
 
   return (
     <main className="p-12">
-      <div className="w-2/3 mx-auto space-y-4">
+      <div className="w-2/3 max-w-[960px] mx-auto space-y-4">
         <QueryForm />
         <h1 className="text-3xl mb-4">
           Historical CrUX Data for: <span className="text-blue-500">{res.record.key.origin}</span>
