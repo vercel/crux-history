@@ -50,11 +50,11 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         }
       },
       y: {
-        type: 'logarithmic',
+        type: 'logarithmic' as const,
         stacked: true,
         title: {
           text: 'Percentage of users',
-          display: true
+          display: true,
         }
       },
     },
