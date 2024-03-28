@@ -9,6 +9,7 @@ const QueryForm = () => {
 
   const [origin, setOrigin] = useState<string>(searchParams.get('origin') || '');
   const [formFactor, setFormFactor] = useState<string>(searchParams.get('formFactor') || '');
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = e => {
     const { value, id } = e.target;
@@ -16,6 +17,9 @@ const QueryForm = () => {
     switch (id) {
       case 'origin':
         setOrigin(value);
+        if(value.length >= 4 && !value.startsWith("http")){
+          setError(`${value} needs to start with https protocol!`);
+        }
         break;
       case 'formFactor':
         setFormFactor(value);
@@ -41,6 +45,9 @@ const QueryForm = () => {
           onChange={handleChange}
           className="text-black"
         />
+        {error && <div className="my-3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <span className="block sm:inline">{error}</span>
+        </div>}
       </div>
       <div className="flex flex-col">
         <label htmlFor="formFactor">Device type</label>
@@ -58,6 +65,7 @@ const QueryForm = () => {
       <button
         type="submit"
         className="bg-neutral-700 p-2 py-1 rounded"
+        disabled={error !== null}
       >
         Submit
       </button>
