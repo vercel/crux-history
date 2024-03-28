@@ -14,45 +14,60 @@ export default async function Home({
 
   const res = await getCruxData(origin || default_origin, formFactor || 'DESKTOP');
 
-  const clsData = transformToChartData(res, 'cumulative_layout_shift');
-  const ttfbData = transformToChartData(res, 'experimental_time_to_first_byte');
-  const fcpData = transformToChartData(res, 'first_contentful_paint');
-  const lcpData = transformToChartData(res, 'largest_contentful_paint');
-  const fipData = transformToChartData(res, 'first_input_delay');
-  const itnpData = transformToChartData(res, 'interaction_to_next_paint');
+  let clsData;
+  let ttfbData;
+  let fcpData;
+  let lcpData;
+  let fipData;
+  let itnpData;
+
+  if (res.error === undefined) {
+    clsData = transformToChartData(res, 'cumulative_layout_shift');
+    ttfbData = transformToChartData(res, 'experimental_time_to_first_byte');
+    fcpData = transformToChartData(res, 'first_contentful_paint');
+    lcpData = transformToChartData(res, 'largest_contentful_paint');
+    fipData = transformToChartData(res, 'first_input_delay');
+    itnpData = transformToChartData(res, 'interaction_to_next_paint');
+  }
 
   return (
     <main className="p-12">
       <div className="w-2/3 max-w-[960px] mx-auto space-y-4">
         <QueryForm />
         <h1 className="text-3xl mb-4">
-          Historical CrUX Data for: <span className="text-blue-500">{res.record.key.origin}</span>
+          Historical CrUX Data for: <span className="text-blue-500">{origin}</span>
         </h1>
-        {res.record.key.formFactor && <p>Platform: {res.record.key.formFactor}</p>}
-        <HistoricalCruxChart
-          title="Cumulative layout shift"
-          cruxChart={clsData}
-        />
-        <HistoricalCruxChart
-          title="Time to first byte (experimental)"
-          cruxChart={ttfbData}
-        />
-        <HistoricalCruxChart
-          title="First contentful paint"
-          cruxChart={fcpData}
-        />
-        <HistoricalCruxChart
-          title="Largest contentful paint"
-          cruxChart={lcpData}
-        />
-        <HistoricalCruxChart
-          title="First input delay"
-          cruxChart={fipData}
-        />
-        <HistoricalCruxChart
-          title="Interaction to next paint"
-          cruxChart={itnpData}
-        />
+        {formFactor && <p>Platform: {formFactor}</p>}
+        {res.error ? (
+          <pre>{JSON.stringify(res.error, null, 2)}</pre>
+        ) : (
+          <>
+            <HistoricalCruxChart
+              title="Cumulative layout shift"
+              cruxChart={clsData}
+            />
+            <HistoricalCruxChart
+              title="Time to first byte (experimental)"
+              cruxChart={ttfbData}
+            />
+            <HistoricalCruxChart
+              title="First contentful paint"
+              cruxChart={fcpData}
+            />
+            <HistoricalCruxChart
+              title="Largest contentful paint"
+              cruxChart={lcpData}
+            />
+            <HistoricalCruxChart
+              title="First input delay"
+              cruxChart={fipData}
+            />
+            <HistoricalCruxChart
+              title="Interaction to next paint"
+              cruxChart={itnpData}
+            />
+          </>
+        )}
       </div>
     </main>
   );
