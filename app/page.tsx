@@ -1,4 +1,5 @@
 import { HistoricalCruxChart } from '@/components/historical-crux-chart';
+import QueryForm from '@/components/query-form';
 import { getCruxData, transformToChartData } from '@/lib/crux-data';
 
 const default_origin = 'https://vercel.com';
@@ -23,39 +24,7 @@ export default async function Home({
   return (
     <main className="p-12">
       <div className="w-2/3 mx-auto space-y-4">
-        <form
-          encType="application/x-www-form-urlencoded"
-          className="w-1/2 space-y-4"
-        >
-          <div className="flex flex-col">
-            <label htmlFor="origin">Origin</label>
-            <input
-              type="text"
-              name="origin"
-              id="origin"
-              placeholder="URL of site to analyze"
-              required
-              className="text-black"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="formFactor">Device type</label>
-            <select
-              name="formFactor"
-              id="formFactor"
-              className="text-black"
-            >
-              <option value={'DESKTOP'}>Desktop</option>
-              <option value={'PHONE'}>Mobile</option>
-            </select>
-          </div>
-          <button
-            type="submit"
-            className="bg-neutral-700 p-2 py-1 rounded"
-          >
-            Submit
-          </button>
-        </form>
+        <QueryForm />
         <h1 className="text-3xl mb-4">
           Historical CrUX Data for: <span className="text-blue-500">{res.record.key.origin}</span>
         </h1>
