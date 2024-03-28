@@ -34,7 +34,7 @@ const QueryForm = () => {
       className="w-1/2 space-y-4"
     >
       <div className="flex flex-col">
-        <label htmlFor="origin">Origin</label>
+        <label htmlFor="origin">Origin (must include protocol)</label>
         <input
           type="text"
           name="origin"
