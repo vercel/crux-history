@@ -34,7 +34,7 @@ export default async function Home({
           cruxChart={clsData}
         />
         <HistoricalCruxChart
-          title="Time to first byte"
+          title="Time to first byte (experimental)"
           cruxChart={ttfbData}
         />
         <HistoricalCruxChart
