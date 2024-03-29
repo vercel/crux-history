@@ -18,7 +18,7 @@ const MetricTrends = ({ data, bins }: Props) => {
   const trends = weeksToCompare.map(t => {
     const comparison = parseFloat(data[data.length - 1 - t].p75);
     const avg = (comparison + current) / 2;
-    const pctChange = (current - comparison) / avg;
+    const pctChange = ((current - comparison) / avg) * 100;
 
     return pctChange;
   });
