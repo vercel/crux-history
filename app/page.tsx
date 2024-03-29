@@ -38,7 +38,7 @@ export default async function Home({
       <div className="w-2/3 max-w-[960px] mx-auto space-y-4">
         <QueryForm />
         <h1 className="text-3xl mb-4">
-          Historical CrUX Data for: <span className="text-blue-500">{url}</span>
+          Historical CrUX Data for: <span className="text-blue-500">{url || default_url}</span>
         </h1>
         {formFactor && <p>Platform: {formFactor}</p>}
         {res.error ? (
