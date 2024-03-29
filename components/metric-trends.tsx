@@ -27,7 +27,10 @@ const MetricTrends = ({ data }: Props) => {
       <div className="flex flex-col">
         <div>
           <p className="text-sm text-neutral-500">
-            Current: <span className="text-white text-lg block">{current.toFixed(2)}</span>
+            Current:{' '}
+            <span className="text-white text-lg block">
+              {current <= 1 ? current.toFixed(2) : current.toString()}
+            </span>
           </p>
         </div>
         {weeksToCompare.map((t, i) => (
