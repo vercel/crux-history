@@ -52,3 +52,8 @@ export type CruxChart = {
     backgroundColor: string;
   }[];
 };
+
+export type CruxTimeseries = {
+  period: CruxCollectionPeriod;
+  p75: number;
+}[];

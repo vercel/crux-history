@@ -1,4 +1,4 @@
-import { CruxData, CruxChart, FormFactor } from './types';
+import { CruxData, CruxChart, FormFactor, CruxTimeseries } from './types';
 
 export async function getCruxData(
   url: string,
@@ -66,4 +66,11 @@ export function transformToChartData(data: CruxData, metric: string): CruxChart 
     labels,
     datasets,
   };
+}
+
+export function getTimeseriesForMetric(data: CruxData, metric: string): CruxTimeseries {
+  return data.record?.collectionPeriods.map((period, i) => ({
+    period,
+    p75: data.record?.metrics[metric].percentilesTimeseries.p75s[i],
+  }))!;
 }
