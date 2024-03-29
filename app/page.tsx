@@ -2,22 +2,19 @@ import { HistoricalCruxChart } from '@/components/historical-crux-chart';
 import QueryForm from '@/components/query-form';
 import { getCruxData, transformToChartData } from '@/lib/crux-data';
 
-const default_origin = 'https://vercel.com';
+const default_url = 'https://vercel.com';
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  const origin = searchParams['origin'];
+  console.log(searchParams);
+  const url = searchParams['url'];
   const formFactor = searchParams['formFactor'];
   const queryType = searchParams['queryType'];
 
-  const res = await getCruxData(
-    origin || default_origin,
-    formFactor || 'DESKTOP',
-    queryType || 'origin'
-  );
+  const res = await getCruxData(url || default_url, formFactor || 'DESKTOP', queryType || 'origin');
 
   let clsData;
   let ttfbData;
@@ -40,7 +37,7 @@ export default async function Home({
       <div className="w-2/3 max-w-[960px] mx-auto space-y-4">
         <QueryForm />
         <h1 className="text-3xl mb-4">
-          Historical CrUX Data for: <span className="text-blue-500">{origin}</span>
+          Historical CrUX Data for: <span className="text-blue-500">{url}</span>
         </h1>
         {formFactor && <p>Platform: {formFactor}</p>}
         {res.error ? (
