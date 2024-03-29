@@ -36,6 +36,12 @@ export default async function Home({
   return (
     <main className="p-12">
       <div className="w-2/3 max-w-[960px] mx-auto space-y-4">
+        <section className="bg-red-200 text-red-800 rounded p-2">
+          <p>
+            ❗ Y-axes on these graphs are logarithmic. Bar size does not represent relative
+            magnitude.
+          </p>
+        </section>
         <QueryForm />
         <h1 className="text-3xl mb-4">
           Historical CrUX Data for: <span className="text-blue-500">{url || default_url}</span>
