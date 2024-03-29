@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import React from 'react'
+import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,17 +17,9 @@ import { CruxChart } from '@/lib/types';
 type Props = {
   title: string;
   cruxChart: CruxChart;
-}
+};
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LogarithmicScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, LogarithmicScale, BarElement, Title, Tooltip, Legend);
 
 export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
   const options = {
@@ -38,7 +30,7 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         color: '#bbb',
         font: {
           size: 24,
-        }
+        },
       },
     },
     responsive: true,
@@ -48,8 +40,8 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         title: {
           text: 'Last day of rolling 28-day measurement window',
           display: true,
-          color: '#bbb'
-        }
+          color: '#bbb',
+        },
       },
       y: {
         type: 'logarithmic' as const,
@@ -57,18 +49,16 @@ export const HistoricalCruxChart = ({ title, cruxChart }: Props) => {
         title: {
           text: 'Percentage of users',
           display: true,
-          color: '#bbb'
-        }
+          color: '#bbb',
+        },
       },
     },
   };
 
   return (
-    <Bar options={options} data={cruxChart} />
-  )
-}
-
-
-
-
-
+    <Bar
+      options={options}
+      data={cruxChart}
+    />
+  );
+};
