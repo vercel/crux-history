@@ -9,7 +9,6 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-  console.log(searchParams);
   const url = searchParams['url'];
   const formFactor = searchParams['formFactor'];
   const queryType = searchParams['queryType'];
