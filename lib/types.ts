@@ -55,5 +55,5 @@ export type CruxChart = {
 
 export type CruxTimeseries = {
   period: CruxCollectionPeriod;
-  p75: number;
+  p75: string;
 }[];
