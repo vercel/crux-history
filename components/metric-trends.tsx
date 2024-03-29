@@ -29,7 +29,7 @@ const MetricTrends = ({ data }: Props) => {
           <p className="text-sm text-neutral-500">
             Current:{' '}
             <span className="text-white text-lg block">
-              {current <= 1 ? current.toFixed(2) : current.toString()}
+              {current <= 1 ? current.toFixed(2) : `${current.toString()}ms`}
             </span>
           </p>
         </div>
