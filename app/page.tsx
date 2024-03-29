@@ -1,7 +1,12 @@
 import { HistoricalCruxChart } from '@/components/historical-crux-chart';
 import MetricTrends from '@/components/metric-trends';
 import QueryForm from '@/components/query-form';
-import { getCruxData, getTimeseriesForMetric, transformToChartData } from '@/lib/crux-data';
+import {
+  getBinsForMetric,
+  getCruxData,
+  getTimeseriesForMetric,
+  transformToChartData,
+} from '@/lib/crux-data';
 
 const default_url = 'https://vercel.com';
 
@@ -59,7 +64,10 @@ export default async function Home({
                 />
               </div>
               <div className="grow">
-                <MetricTrends data={getTimeseriesForMetric(res, 'cumulative_layout_shift')} />
+                <MetricTrends
+                  data={getTimeseriesForMetric(res, 'cumulative_layout_shift')}
+                  bins={getBinsForMetric(res, 'cumulative_layout_shift')}
+                />
               </div>
             </div>
             <div className="flex">
@@ -72,6 +80,7 @@ export default async function Home({
               <div className="grow">
                 <MetricTrends
                   data={getTimeseriesForMetric(res, 'experimental_time_to_first_byte')}
+                  bins={getBinsForMetric(res, 'experimental_time_to_first_byte')}
                 />
               </div>
             </div>
@@ -83,7 +92,10 @@ export default async function Home({
                 />
               </div>
               <div className="grow">
-                <MetricTrends data={getTimeseriesForMetric(res, 'first_contentful_paint')} />
+                <MetricTrends
+                  data={getTimeseriesForMetric(res, 'first_contentful_paint')}
+                  bins={getBinsForMetric(res, 'first_contentful_paint')}
+                />
               </div>
             </div>
             <div className="flex">
@@ -94,7 +106,10 @@ export default async function Home({
                 />
               </div>
               <div className="grow">
-                <MetricTrends data={getTimeseriesForMetric(res, 'largest_contentful_paint')} />
+                <MetricTrends
+                  data={getTimeseriesForMetric(res, 'largest_contentful_paint')}
+                  bins={getBinsForMetric(res, 'largest_contentful_paint')}
+                />
               </div>
             </div>
             <div className="flex">
@@ -105,7 +120,10 @@ export default async function Home({
                 />
               </div>
               <div className="grow">
-                <MetricTrends data={getTimeseriesForMetric(res, 'first_input_delay')} />
+                <MetricTrends
+                  data={getTimeseriesForMetric(res, 'first_input_delay')}
+                  bins={getBinsForMetric(res, 'first_input_delay')}
+                />
               </div>
             </div>
             <div className="flex">
@@ -116,7 +134,10 @@ export default async function Home({
                 />
               </div>
               <div className="grow">
-                <MetricTrends data={getTimeseriesForMetric(res, 'interaction_to_next_paint')} />
+                <MetricTrends
+                  data={getTimeseriesForMetric(res, 'interaction_to_next_paint')}
+                  bins={getBinsForMetric(res, 'interaction_to_next_paint')}
+                />
               </div>
             </div>
           </div>

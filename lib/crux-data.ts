@@ -1,4 +1,4 @@
-import { CruxData, CruxChart, FormFactor, CruxTimeseries } from './types';
+import { CruxData, CruxChart, FormFactor, CruxTimeseries, CruxMetricBins } from './types';
 
 export async function getCruxData(
   url: string,
@@ -73,4 +73,20 @@ export function getTimeseriesForMetric(data: CruxData, metric: string): CruxTime
     period,
     p75: data.record?.metrics[metric].percentilesTimeseries.p75s[i],
   }))!;
+}
+
+export function getBinsForMetric(data: CruxData, metric: string): CruxMetricBins {
+  const dataForMetric = data.record?.metrics[metric];
+  return {
+    good: [dataForMetric.histogramTimeseries[0].start, dataForMetric.histogramTimeseries[0].end],
+    ok: [dataForMetric.histogramTimeseries[1].start, dataForMetric.histogramTimeseries[1].end],
+    bad: [dataForMetric.histogramTimeseries[2].start, Infinity],
+  };
+}
+
+export function getBinForValue(bins: CruxMetricBins, value: number): 'good' | 'ok' | 'bad' {
+  if (value <= bins.good[1]) return 'good';
+  if (value > bins.ok[0] && value <= bins.ok[1]) return 'ok';
+
+  return 'bad';
 }

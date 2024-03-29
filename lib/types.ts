@@ -57,3 +57,9 @@ export type CruxTimeseries = {
   period: CruxCollectionPeriod;
   p75: string;
 }[];
+
+export type CruxMetricBins = {
+  good: number[];
+  ok: number[];
+  bad: number[];
+};

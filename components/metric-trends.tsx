@@ -1,16 +1,18 @@
 import React from 'react';
 import { FiArrowUp, FiArrowDown } from 'react-icons/fi';
-import { CruxTimeseries } from '@/lib/types';
+import { CruxMetricBins, CruxTimeseries } from '@/lib/types';
+import { getBinForValue } from '@/lib/crux-data';
 
 type Props = {
   data: CruxTimeseries;
+  bins: CruxMetricBins;
 };
 
 // Array here represents comparison time in weeks
 // e.g. 4 -> 4 weeks ago, 8 -> 8 weeks ago
 const weeksToCompare = [4, 8, 12];
 
-const MetricTrends = ({ data }: Props) => {
+const MetricTrends = ({ data, bins }: Props) => {
   const current = parseFloat(data[data.length - 1].p75);
 
   const trends = weeksToCompare.map(t => {
@@ -21,6 +23,14 @@ const MetricTrends = ({ data }: Props) => {
     return pctChange;
   });
 
+  const textColors = {
+    good: 'text-green-500',
+    ok: 'text-yellow-500',
+    bad: 'text-red-500',
+  };
+
+  const color = textColors[getBinForValue(bins, current)];
+
   return (
     <div className="px-4 py-6">
       <h3 className="text-lg mb-3">&Delta; p75</h3>
@@ -28,7 +38,7 @@ const MetricTrends = ({ data }: Props) => {
         <div>
           <p className="text-sm text-neutral-500">
             Current:{' '}
-            <span className="text-white text-lg block">
+            <span className={`${color} text-2xl block`}>
               {current <= 1 ? current.toFixed(2) : `${current.toString()}ms`}
             </span>
           </p>
