@@ -11,7 +11,7 @@ This project is a small collection of charts that shows CrUX (Chrome User Experi
 - FCP (First contentful paint)
 - LCP (Largest contentful paint)
 - FID (First input delay)
-- Interaction to next paint
+- INP (Interaction to next paint)
 
 For more info on what CrUX data entails and how it's gathered, see: [https://developer.chrome.com/docs/crux](https://developer.chrome.com/docs/crux).
 
