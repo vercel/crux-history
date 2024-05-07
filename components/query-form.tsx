@@ -18,14 +18,13 @@ const QueryForm = () => {
     const { value, id } = e.target;
 
     switch (id) {
-      case 'origin':
-        setOrigin(value);
-        if(value.length >= 4 && !value.startsWith("http")){
-          setError(`${value} needs to start with https protocol!`);
-        }
-        break;
       case 'url':
         setUrl(value);
+        if (value.length >= 5 && !value.startsWith('https')) {
+          setError(`${value} needs to start with https protocol!`);
+        } else {
+          setError(null);
+        }
         break;
       case 'formFactor':
         setFormFactor(value);
@@ -83,9 +82,14 @@ const QueryForm = () => {
           onChange={handleChange}
           className="text-black"
         />
-        {error && <div className="my-3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          <span className="block sm:inline">{error}</span>
-        </div>}
+        {error && (
+          <div
+            className="my-3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
       </div>
       <div className="flex flex-col">
         <label htmlFor="formFactor">Device type</label>
